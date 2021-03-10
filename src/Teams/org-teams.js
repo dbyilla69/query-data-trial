@@ -3,17 +3,19 @@ import { Fragment, useState } from 'react';
 import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
+import { NavLink } from 'react-router-dom';
 import Paper from '@material-ui/core/Paper';
 import RingLoader from 'react-spinners/RingLoader';
 import Select from '@material-ui/core/Select';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
 import { makeStyles } from '@material-ui/core/styles';
 import { teamOptions } from './teamNames';
-import { useQuery } from 'react-query';
-import  TeamPlayer  from './team-player';
-import Header from './team-header';
+import useAxios from '../hooks/useAxios';
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -33,37 +35,18 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const username = '8d5243ad-bd42-48dc-860b-3b58af';
-const password = 'MYSPORTSFEEDS';
-
-const fetchTeams = async () => {
-//   const res = await fetch('http://swapi.dev/api/planets/');
-//   return res.json();
-    //   const apiUrl = `https://api.mysportsfeeds.com/v2.1/pull/nfl/2019-2020-regular/player_stats_totals.json?team=was`;
-    //    const res= await fetch(apiUrl, {
-        //   headers: {
-        //     Authorization: 'Basic ' + btoa(username + ':' + password)
-        //   }
-    //     }); return res.json();
-    const result = await fetch(`https://api.mysportsfeeds.com/v2.1/pull/nfl/2019-2020-regular/player_stats_totals.json?team=was&limit=20`, {headers: {
-            Authorization: 'Basic ' + btoa(username + ':' + password)
-          }})
-    return result.json()
-    
-    }
-        
-
 const Teams = () => {
   const classes = useStyles();
   const initialTeamState = 'ari';
   const [team, setTeam] = useState(initialTeamState);
 
-    const { data, status } = useQuery('teams', fetchTeams);
-  console.log('status', status);
-  console.log('data', data);
+  const { data, loading, error } = useAxios(
+    `/2019-2020-regular/player_stats_totals.json?team=${team}&limit=20`
+    // `/players.json?team=${team}&rosterstatus=assigned-to-roster&limit=5`
+  );
 
-//   if (loading) return <RingLoader size={150} color={'#033369'} />;
-//   if (error) throw error;
+  if (loading) return <RingLoader size={150} color={'#033369'} />;
+  if (error) throw error;
 
   const handleChange = (event) => {
     setTeam(event.target.value);
@@ -93,9 +76,49 @@ const Teams = () => {
           size='small'
           aria-label='a dense table'
         >
- <Header/>
+          <TableHead>
+            <TableRow>
+              <TableCell>#</TableCell>
+              <TableCell>Players</TableCell>
+              <TableCell>Position</TableCell>
+              <TableCell>Height</TableCell>
+              <TableCell>Weight</TableCell>
+              <TableCell>BirthDate</TableCell>
+              <TableCell>Age</TableCell>
+              <TableCell>College</TableCell>
+            </TableRow>
+          </TableHead>
           <TableBody>
-            {status==='success'&&data.playerStatsTotals.map(({ player }) =><TeamPlayer key={player.id} player={player}/>)}
+            {data.playerStatsTotals.map(({ player }) => {
+              const {
+                id,
+                firstName,
+                lastName,
+                jerseyNumber,
+                primaryPosition,
+                height,
+                weight,
+                birthDate,
+                age,
+                college
+              } = player;
+              return (
+                <TableRow key={id}>
+                  <TableCell>{jerseyNumber}</TableCell>
+                  <TableCell>
+                    <NavLink color='primary' to={`/playerStats/${id}`}>
+                      {firstName} {lastName}
+                    </NavLink>
+                  </TableCell>
+                  <TableCell>{primaryPosition}</TableCell>
+                  <TableCell>{height}</TableCell>
+                  <TableCell>{weight}</TableCell>
+                  <TableCell>{birthDate}</TableCell>
+                  <TableCell>{age}</TableCell>
+                  <TableCell>{college}</TableCell>
+                </TableRow>
+              );
+            })}
           </TableBody>
         </Table>
       </TableContainer>
