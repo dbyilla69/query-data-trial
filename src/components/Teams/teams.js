@@ -6,7 +6,7 @@ import TableContainer from '@material-ui/core/TableContainer';
 import { makeStyles } from '@material-ui/core/styles';
 import TeamPlayer from './team-player';
 import Header from './team-header';
-import useTeam from '../hooks/useTeam';
+import useTeam from '../../hooks/useTeam';
 
 const useStyles = makeStyles((theme) => ({
   formControl: {

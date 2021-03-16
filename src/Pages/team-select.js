@@ -3,9 +3,9 @@ import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import { makeStyles } from '@material-ui/core/styles';
-import { teamOptions } from './teamNames';
+import { teamOptions } from '../components/Teams/teamNames';
 import Select from '@material-ui/core/Select';
-import Teams from './teams';
+import Teams from '../components/Teams/teams';
 
 const useStyles = makeStyles((theme) => ({
   formControl: {

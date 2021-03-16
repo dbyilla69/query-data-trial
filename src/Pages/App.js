@@ -1,8 +1,7 @@
-import Teams from './Teams/teams';
-import TeamSelect from './Teams/team-select';
-import PlayerDetails from './Players/playerDetails';
+import PlayerDetails from '../Players/playerDetails';
 import { Routes, Route } from 'react-router-dom';
 import { ReactQueryDevtools } from 'react-query/devtools';
+import TeamSelect from './team-select';
 
 const App = () => {
   return (
