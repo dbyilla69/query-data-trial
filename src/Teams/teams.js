@@ -4,10 +4,9 @@ import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableContainer from '@material-ui/core/TableContainer';
 import { makeStyles } from '@material-ui/core/styles';
-import { useQuery } from 'react-query';
 import TeamPlayer from './team-player';
 import Header from './team-header';
-import axios from 'axios';
+import useTeam from '../hooks/useTeam';
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -27,41 +26,12 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const username = '8d5243ad-bd42-48dc-860b-3b58af';
-const password = 'MYSPORTSFEEDS';
-// const api = `https://api.mysportsfeeds.com/v2.1/pull/nfl/2019-2020-regular/player_stats_totals.json?team=${team}&limit=20`;
-const header = {
-  headers: {
-    Authorization: 'Basic ' + btoa(username + ':' + password)
-  }
-};
-
-// const fetchTeams = (key, team) => {
-//   console.log('url trial', team);
-//   const result = axios
-//     .get(api, header)
-//     .then((res) => res.data.playerStatsTotals);
-//   return result;
-// };
 const Teams = ({ team }) => {
   const classes = useStyles();
-  //HAVE THE FUNCTION INLINE!!!!!
-  // const queryInfo = useQuery('team', () =>
-  //   axios.get(api, header).then((res) => res.data.playerStatsTotals)
-  // );
-  // const api = `https://api.mysportsfeeds.com/v2.1/pull/nfl/2019-2020-regular/player_stats_totals.json?team=${team}&limit=20`;
-
-  const { isLoading, data } = useQuery(['team', team], () =>
-    axios
-      .get(
-        `https://api.mysportsfeeds.com/v2.1/pull/nfl/2019-2020-regular/player_stats_totals.json?team=${team}&limit=20`,
-        header
-      )
-      .then((res) => res.data.playerStatsTotals)
-  );
+  const { data, error, isLoading } = useTeam(team);
 
   if (isLoading) return <RingLoader size={150} color={'#033369'} />;
-  // if (error) throw error;
+  if (error) throw error;
 
   return (
     <>
