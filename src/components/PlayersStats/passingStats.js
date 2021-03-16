@@ -6,7 +6,7 @@ import List from '@material-ui/core/List';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import ListItemText from '@material-ui/core/ListItemText';
 import Typography from '@material-ui/core/Typography';
-import { createData } from '../util';
+import { createData } from '../../util';
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles({

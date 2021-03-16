@@ -1,4 +1,4 @@
-import AccordionPlayer from './accordionPlayer';
+import AccordionPlayer from '../components/Players/accordionPlayer';
 import Avatar from '@material-ui/core/Avatar';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
@@ -46,7 +46,7 @@ const PlayerDetails = () => {
 
   if (loading) return <CircleLoader size={400} color={'#033369'} />;
   if (error) throw error;
-  
+
   const primaryTeamColor = data.references.teamReferences[0].teamColoursHex[0];
   const playerStat = data.playerStatsTotals[0].player;
   const stats = data.playerStatsTotals[0].stats;

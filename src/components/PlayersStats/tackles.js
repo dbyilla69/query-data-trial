@@ -6,7 +6,7 @@ import List from '@material-ui/core/List';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import ListItemText from '@material-ui/core/ListItemText';
 import Typography from '@material-ui/core/Typography';
-import { createData } from '../util';
+import { createData } from '../../util';
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles({
@@ -14,23 +14,24 @@ const useStyles = makeStyles({
   accordionDetails: { display: 'block' }
 });
 
-const KickoffReturnStats = ({
-  stats,
-  primaryTeamColor,
-  secondaryTeamColor
-}) => {
+const Tackles = ({ stats, primaryTeamColor, secondaryTeamColor }) => {
   const classes = useStyles();
+  const {
+    sackYds,
+    sacks,
+    tackleAst,
+    tackleSolo,
+    tackleTotal,
+    tacklesForLoss
+  } = stats.tackles;
 
-  const kickoffStats = [
-    createData('kr20Plus:', stats.kickoffReturns.kr20Plus),
-    createData('kr40Plus:', stats.kickoffReturns.kr40Plus),
-    createData('krAvg:', stats.kickoffReturns.krAvg),
-    createData('krFC:', stats.kickoffReturns.krFC),
-    createData('krFum:', stats.kickoffReturns.krFum),
-    createData('krLng:', stats.kickoffReturns.krLng),
-    createData('krRet:', stats.kickoffReturns.krRet),
-    createData('krTD:', stats.kickoffReturns.krTD),
-    createData('krYds:', stats.kickoffReturns.krYds)
+  const tackleStats = [
+    createData('sackYds:', sackYds),
+    createData('sacks:', sacks),
+    createData('tackleAst:', tackleAst),
+    createData('tackleSolo:', tackleSolo),
+    createData('tackleTotal:', tackleTotal),
+    createData('tacklesForLoss: ', tacklesForLoss)
   ];
 
   return (
@@ -49,11 +50,11 @@ const KickoffReturnStats = ({
           }}
           variant='h5'
         >
-          Kickoff Returns
+          Tackles
         </Typography>
       </AccordionSummary>
       <AccordionDetails className={classes.accordionDetails}>
-        {kickoffStats.map((p) => (
+        {tackleStats.map((p) => (
           <List dense key={p.name}>
             <ListItemText primary={p.name} />
             <ListItemSecondaryAction>{p.info}</ListItemSecondaryAction>
@@ -64,4 +65,4 @@ const KickoffReturnStats = ({
   );
 };
 
-export default KickoffReturnStats;
+export default Tackles;

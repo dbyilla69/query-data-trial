@@ -6,7 +6,7 @@ import List from '@material-ui/core/List';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import ListItemText from '@material-ui/core/ListItemText';
 import Typography from '@material-ui/core/Typography';
-import { createData } from '../util';
+import { createData } from '../../util';
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles({
@@ -14,20 +14,17 @@ const useStyles = makeStyles({
   accordionDetails: { display: 'block' }
 });
 
-const ReceivingStats = ({ stats, primaryTeamColor, secondaryTeamColor }) => {
+const TwoPointsStats = ({ stats, primaryTeamColor, secondaryTeamColor }) => {
   const classes = useStyles();
 
-  const receivingStats = [
-    createData('Rec 1st Downs:', stats.receiving?.rec1stDowns),
-    createData('Rec 20 Plus:', stats.receiving?.rec20Plus),
-    createData('Rec 40 Plus:', stats.receiving?.rec40Plus),
-    createData('Rec Average: ', stats.receiving?.recAverage),
-    createData('Rec Fumbles:', stats.receiving?.recFumbles),
-    createData('Rec Long:', stats.receiving?.recLng),
-    createData('Rec TD:', stats.receiving?.recTD),
-    createData('Rec Yards:', stats.receiving?.recYards),
-    createData('Receptions:', stats.receiving?.receptions),
-    createData('Targets:', stats.receiving?.targets)
+  const twoPointConversionStats = [
+    createData('twoPtAtt:', stats.twoPointAttempts?.twoPtAtt),
+    createData('twoPtMade:', stats.twoPointAttempts?.twoPtMade),
+    createData('twoPtPassAtt:', stats.twoPointAttempts?.twoPtPassAtt),
+    createData('twoPtPassMade:', stats.twoPointAttempts?.twoPtPassMade),
+    createData('twoPtPassRec:', stats.twoPointAttempts?.twoPtPassRec),
+    createData('twoPtRushAtt: ', stats.twoPointAttempts?.twoPtRushAtt),
+    createData('twoPtRushMade:', stats.twoPointAttempts?.twoPtRushMade)
   ];
 
   return (
@@ -46,12 +43,12 @@ const ReceivingStats = ({ stats, primaryTeamColor, secondaryTeamColor }) => {
           }}
           variant='h5'
         >
-          Receiving Stats
+          Two points Conversions
         </Typography>
       </AccordionSummary>
       <AccordionDetails className={classes.accordionDetails}>
-        {receivingStats.length &&
-          receivingStats.map((p) => (
+        {twoPointConversionStats.length &&
+          twoPointConversionStats.map((p) => (
             <List dense key={p.name}>
               <ListItemText primary={p.name} />
               <ListItemSecondaryAction>{p.info}</ListItemSecondaryAction>
@@ -62,4 +59,4 @@ const ReceivingStats = ({ stats, primaryTeamColor, secondaryTeamColor }) => {
   );
 };
 
-export default ReceivingStats;
+export default TwoPointsStats;

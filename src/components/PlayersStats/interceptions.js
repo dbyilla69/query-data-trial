@@ -6,7 +6,7 @@ import List from '@material-ui/core/List';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import ListItemText from '@material-ui/core/ListItemText';
 import Typography from '@material-ui/core/Typography';
-import { createData } from '../util';
+import { createData } from '../../util';
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles({
@@ -14,30 +14,31 @@ const useStyles = makeStyles({
   accordionDetails: { display: 'block' }
 });
 
-const PuntReturnStats = ({ stats, primaryTeamColor, secondaryTeamColor }) => {
+const Interceptions = ({ stats, primaryTeamColor, secondaryTeamColor }) => {
   const classes = useStyles();
   const {
-    pr20Plus,
-    pr40Plus,
-    prAvg,
-    prFC,
-    prFum,
-    prLng,
-    prRet,
-    prTD,
-    prYds
-  } = stats.puntReturns;
-
-  const puntStats = [
-    createData('pr20Plus:', pr20Plus),
-    createData('pr40Plus:', pr40Plus),
-    createData('prAvg:', prAvg),
-    createData('prFC:', prFC),
-    createData('prFum:', prFum),
-    createData('prLng:', prLng),
-    createData('prRet:', prRet),
-    createData('prTD:', prTD),
-    createData('prYds:', prYds)
+    intAverage,
+    intLng,
+    intTD,
+    intYds,
+    interceptions,
+    kB,
+    passesDefended,
+    safeties,
+    stuffYds,
+    stuffs
+  } = stats.interceptions;
+  const intStats = [
+    createData('intAverage:', intAverage),
+    createData('intLng:', intLng),
+    createData('intTD:', intTD),
+    createData('intYds:', intYds),
+    createData('interceptions:', interceptions),
+    createData('kB:', kB),
+    createData('passesDefended:', passesDefended),
+    createData('safeties:', safeties),
+    createData('stuffYds:', stuffYds),
+    createData('stuffs:', stuffs)
   ];
 
   return (
@@ -56,19 +57,20 @@ const PuntReturnStats = ({ stats, primaryTeamColor, secondaryTeamColor }) => {
           }}
           variant='h5'
         >
-          Punt Returns
+          Interceptions
         </Typography>
       </AccordionSummary>
       <AccordionDetails className={classes.accordionDetails}>
-        {puntStats.map((p) => (
-          <List dense key={p.name}>
-            <ListItemText primary={p.name} />
-            <ListItemSecondaryAction>{p.info}</ListItemSecondaryAction>
-          </List>
-        ))}
+        {intStats.length &&
+          intStats.map((p) => (
+            <List dense key={p.name}>
+              <ListItemText primary={p.name} />
+              <ListItemSecondaryAction>{p.info}</ListItemSecondaryAction>
+            </List>
+          ))}
       </AccordionDetails>
     </Accordion>
   );
 };
 
-export default PuntReturnStats;
+export default Interceptions;

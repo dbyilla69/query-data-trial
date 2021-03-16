@@ -1,7 +1,7 @@
-import PlayerDetails from '../Players/playerDetails';
 import { Routes, Route } from 'react-router-dom';
 import { ReactQueryDevtools } from 'react-query/devtools';
 import TeamSelect from './team-select';
+import PlayerDetails from './playerDetails';
 
 const App = () => {
   return (

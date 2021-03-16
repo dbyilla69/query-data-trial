@@ -6,7 +6,7 @@ import List from '@material-ui/core/List';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import ListItemText from '@material-ui/core/ListItemText';
 import Typography from '@material-ui/core/Typography';
-import { createData } from '../util';
+import { createData } from '../../util';
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles({
@@ -14,20 +14,28 @@ const useStyles = makeStyles({
   accordionDetails: { display: 'block' }
 });
 
-const RushingStats = ({ stats, primaryTeamColor, secondaryTeamColor }) => {
+const FumbleStats = ({ stats, primaryTeamColor, secondaryTeamColor }) => {
   const classes = useStyles();
+  const {
+    fumForced,
+    fumLost,
+    fumOppRec,
+    fumOwnRec,
+    fumRecYds,
+    fumTD,
+    fumTotalRec,
+    fumbles
+  } = stats.fumbles;
 
-  const rushingStats = [
-    createData('Rush 1st Downs:', stats.rushing?.rush1stDowns),
-    createData('Rush 1st Downs Pct:', stats.rushing?.rush1stDownsPct),
-    createData('Rush 20 Plus:', stats.rushing?.rush20Plus),
-    createData('Rush 40 Plus:', stats.rushing?.rush40Plus),
-    createData('Rush Attempts:', stats.rushing?.rushAttempts),
-    createData('Rush Average:', stats.rushing?.rushAverage),
-    createData('Rush Fumbles:', stats.rushing?.rushFumbles),
-    createData('Rush Lng: ', stats.rushing?.rushLng),
-    createData('Rush TD:', stats.rushing?.rushTD),
-    createData('Rush Yards:', stats.rushing?.rushYards)
+  const fumStats = [
+    createData('Fum Forced:', fumForced),
+    createData('Fum Lost:', fumLost),
+    createData('Fum Opp Rec:', fumOppRec),
+    createData('Fum Own Rec:', fumOwnRec),
+    createData('Fum Rec Yds:', fumRecYds),
+    createData('Fum TD:', fumTD),
+    createData('Fum Total Rec:', fumTotalRec),
+    createData('Fumbles:', fumbles)
   ];
 
   return (
@@ -36,8 +44,8 @@ const RushingStats = ({ stats, primaryTeamColor, secondaryTeamColor }) => {
         expandIcon={
           <ExpandMoreIcon style={{ color: `${secondaryTeamColor}` }} />
         }
-        aria-controls='panel2a-content'
-        id='panel2a-header'
+        aria-controls='panel3a-content'
+        id='panel3a-header'
         style={{ backgroundColor: `${primaryTeamColor}` }}
       >
         <Typography
@@ -46,19 +54,20 @@ const RushingStats = ({ stats, primaryTeamColor, secondaryTeamColor }) => {
           }}
           variant='h5'
         >
-          Rushing Stats
+          Fumble Stats
         </Typography>
       </AccordionSummary>
       <AccordionDetails className={classes.accordionDetails}>
-        {rushingStats.map((p) => (
-          <List dense key={p.name}>
-            <ListItemText primary={p.name} />
-            <ListItemSecondaryAction>{p.info}</ListItemSecondaryAction>
-          </List>
-        ))}
+        {fumStats.length &&
+          fumStats.map((p) => (
+            <List dense key={p.name}>
+              <ListItemText primary={p.name} />
+              <ListItemSecondaryAction>{p.info}</ListItemSecondaryAction>
+            </List>
+          ))}
       </AccordionDetails>
     </Accordion>
   );
 };
 
-export default RushingStats;
+export default FumbleStats;

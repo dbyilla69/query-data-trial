@@ -6,7 +6,7 @@ import List from '@material-ui/core/List';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import ListItemText from '@material-ui/core/ListItemText';
 import Typography from '@material-ui/core/Typography';
-import { createData } from '../util';
+import { createData } from '../../util';
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles({
@@ -14,28 +14,20 @@ const useStyles = makeStyles({
   accordionDetails: { display: 'block' }
 });
 
-const FumbleStats = ({ stats, primaryTeamColor, secondaryTeamColor }) => {
+const ReceivingStats = ({ stats, primaryTeamColor, secondaryTeamColor }) => {
   const classes = useStyles();
-  const {
-    fumForced,
-    fumLost,
-    fumOppRec,
-    fumOwnRec,
-    fumRecYds,
-    fumTD,
-    fumTotalRec,
-    fumbles
-  } = stats.fumbles;
 
-  const fumStats = [
-    createData('Fum Forced:', fumForced),
-    createData('Fum Lost:', fumLost),
-    createData('Fum Opp Rec:', fumOppRec),
-    createData('Fum Own Rec:', fumOwnRec),
-    createData('Fum Rec Yds:', fumRecYds),
-    createData('Fum TD:', fumTD),
-    createData('Fum Total Rec:', fumTotalRec),
-    createData('Fumbles:', fumbles)
+  const receivingStats = [
+    createData('Rec 1st Downs:', stats.receiving?.rec1stDowns),
+    createData('Rec 20 Plus:', stats.receiving?.rec20Plus),
+    createData('Rec 40 Plus:', stats.receiving?.rec40Plus),
+    createData('Rec Average: ', stats.receiving?.recAverage),
+    createData('Rec Fumbles:', stats.receiving?.recFumbles),
+    createData('Rec Long:', stats.receiving?.recLng),
+    createData('Rec TD:', stats.receiving?.recTD),
+    createData('Rec Yards:', stats.receiving?.recYards),
+    createData('Receptions:', stats.receiving?.receptions),
+    createData('Targets:', stats.receiving?.targets)
   ];
 
   return (
@@ -54,12 +46,12 @@ const FumbleStats = ({ stats, primaryTeamColor, secondaryTeamColor }) => {
           }}
           variant='h5'
         >
-          Fumble Stats
+          Receiving Stats
         </Typography>
       </AccordionSummary>
       <AccordionDetails className={classes.accordionDetails}>
-        {fumStats.length &&
-          fumStats.map((p) => (
+        {receivingStats.length &&
+          receivingStats.map((p) => (
             <List dense key={p.name}>
               <ListItemText primary={p.name} />
               <ListItemSecondaryAction>{p.info}</ListItemSecondaryAction>
@@ -70,4 +62,4 @@ const FumbleStats = ({ stats, primaryTeamColor, secondaryTeamColor }) => {
   );
 };
 
-export default FumbleStats;
+export default ReceivingStats;
