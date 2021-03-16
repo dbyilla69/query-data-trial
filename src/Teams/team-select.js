@@ -4,6 +4,8 @@ import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import { makeStyles } from '@material-ui/core/styles';
 import { teamOptions } from './teamNames';
+import Select from '@material-ui/core/Select';
+import Teams from './teams';
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -13,20 +15,19 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const TeamSelect = () => {
-      const classes = useStyles();
- const initialTeamState = 'ari';
+  const classes = useStyles();
+  const initialTeamState = 'ari';
   const [team, setTeam] = useState(initialTeamState);
 
-      const handleChange = (event) => {
-    setTeam(event.target.value);
-  };
-    return (       <FormControl variant='outlined' className={classes.formControl}>
+  return (
+    <>
+      <FormControl variant='outlined' className={classes.formControl}>
         <InputLabel id='demo-simple-select-outlined-label'>Team</InputLabel>
-        <TeamSelect
+        <Select
           labelId='demo-simple-select-outlined-label'
           id='demo-simple-select-outlined'
           value={team}
-          onChange={handleChange}
+          onChange={(event) => setTeam(event.target.value)}
           label='Age'
         >
           {teamOptions.map(({ label, value }) => (
@@ -34,8 +35,11 @@ const TeamSelect = () => {
               {label}
             </MenuItem>
           ))}
-        </TeamSelect>
-      </FormControl> );
-}
- 
+        </Select>
+      </FormControl>
+      <Teams team={team} />
+    </>
+  );
+};
+
 export default TeamSelect;
