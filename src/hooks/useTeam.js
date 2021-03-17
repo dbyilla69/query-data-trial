@@ -6,7 +6,6 @@ const getTeamRoster = async (team) => {
   const dataRoster = await axios
     .get(api(team), header)
     .then((res) => res.data.playerStatsTotals);
-  console.log('data back', dataRoster);
   return dataRoster;
 };
 

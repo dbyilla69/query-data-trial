@@ -16,8 +16,8 @@ import TableRow from '@material-ui/core/TableRow';
 import Typography from '@material-ui/core/Typography';
 import { createData } from '../util';
 import { makeStyles } from '@material-ui/core/styles';
-import useAxios from '../hooks/useAxios';
 import { useParams } from 'react-router-dom';
+import usePlayerDetails from '../hooks/usePlayerDetails';
 
 const useStyles = makeStyles((theme) => ({
   root: { minWidth: 400, marginLeft: theme.spacing(4) },
@@ -40,11 +40,9 @@ const useStyles = makeStyles((theme) => ({
 const PlayerDetails = () => {
   const classes = useStyles();
   const { playerSlug } = useParams();
-  const { data, loading, error } = useAxios(
-    `/2019-2020-regular/player_stats_totals.json?player=${playerSlug}&limit=20`
-  );
+  const { data, error, isLoading } = usePlayerDetails(playerSlug);
 
-  if (loading) return <CircleLoader size={400} color={'#033369'} />;
+  if (isLoading) return <CircleLoader size={400} color={'#033369'} />;
   if (error) throw error;
 
   const primaryTeamColor = data.references.teamReferences[0].teamColoursHex[0];
