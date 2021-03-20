@@ -13,12 +13,21 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const PlayerCard = ({ playerStat, teamLogo }) => {
+const PlayerCard = ({ playerStat, primaryTeamColor }) => {
   const classes = useStyles();
   return (
     <Card className={classes.root}>
       <CardHeader
-        avatar={<Avatar src={teamLogo} aria-label='recipe' />}
+        avatar={
+          <Avatar
+            style={{
+              backgroundColor: `${primaryTeamColor}`
+            }}
+            variant='square'
+          >
+            {playerStat.jerseyNumber}
+          </Avatar>
+        }
         title={
           <Typography variant='h4' align='left'>
             {`${playerStat.firstName} ${playerStat.lastName}`}

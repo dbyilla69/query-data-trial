@@ -45,7 +45,10 @@ const PlayerDetails = () => {
         }}
       />
       <Grid container spacing={4}>
-        <PlayerCard playerStat={playerStat} teamLogo={teamLogo} />
+        <PlayerCard
+          playerStat={playerStat}
+          primaryTeamColor={primaryTeamColor}
+        />
         <PlayerInfo playerStat={playerStat} stats={stats} />
         <MorePlayerInfo playerStat={playerStat} stats={stats} />
       </Grid>

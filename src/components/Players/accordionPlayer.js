@@ -19,36 +19,49 @@ const AccordionPlayer = ({ stats, secondaryTeamColor, primaryTeamColor }) => {
 
   return (
     <Grid className={classes.containerRoot}>
-      <PassingStats
-        stats={stats}
-        primaryTeamColor={primaryTeamColor}
-        secondaryTeamColor={secondaryTeamColor}
-      />
-      <RushingStats
-        stats={stats}
-        primaryTeamColor={primaryTeamColor}
-        secondaryTeamColor={secondaryTeamColor}
-      />
-      <ReceivingStats
-        stats={stats}
-        primaryTeamColor={primaryTeamColor}
-        secondaryTeamColor={secondaryTeamColor}
-      />
-      <FumbleStats
-        stats={stats}
-        primaryTeamColor={primaryTeamColor}
-        secondaryTeamColor={secondaryTeamColor}
-      />
-      <Interceptions
-        stats={stats}
-        primaryTeamColor={primaryTeamColor}
-        secondaryTeamColor={secondaryTeamColor}
-      />
-      <Tackles
-        stats={stats}
-        primaryTeamColor={primaryTeamColor}
-        secondaryTeamColor={secondaryTeamColor}
-      />
+      {/*  {isStatsAvaliable && (
+        <PassingStats
+          stats={stats}
+          primaryTeamColor={primaryTeamColor}
+          secondaryTeamColor={secondaryTeamColor}
+        />
+      )}
+
+      {isStatsAvaliable(stats?.rushing) && (
+        <RushingStats
+          stats={stats}
+          primaryTeamColor={primaryTeamColor}
+          secondaryTeamColor={secondaryTeamColor}
+        />
+      )}
+      {isStatsAvaliable(stats?.receiving) && (
+        <ReceivingStats
+          stats={stats}
+          primaryTeamColor={primaryTeamColor}
+          secondaryTeamColor={secondaryTeamColor}
+        />
+      )}
+      {isStatsAvaliable(stats?.fumbles) && (
+        <FumbleStats
+          stats={stats}
+          primaryTeamColor={primaryTeamColor}
+          secondaryTeamColor={secondaryTeamColor}
+        />
+      )}
+      {isStatsAvaliable(stats?.interceptions) && (
+        <Interceptions
+          stats={stats}
+          primaryTeamColor={primaryTeamColor}
+          secondaryTeamColor={secondaryTeamColor}
+        />
+      )}
+      {isStatsAvaliable(stats?.tackles) && (
+        <Tackles
+          stats={stats}
+          primaryTeamColor={primaryTeamColor}
+          secondaryTeamColor={secondaryTeamColor}
+        />
+      )}
       <KickoffReturnStats
         stats={stats}
         primaryTeamColor={primaryTeamColor}
@@ -63,7 +76,7 @@ const AccordionPlayer = ({ stats, secondaryTeamColor, primaryTeamColor }) => {
         stats={stats}
         primaryTeamColor={primaryTeamColor}
         secondaryTeamColor={secondaryTeamColor}
-      />
+      /> */}
     </Grid>
   );
 };
