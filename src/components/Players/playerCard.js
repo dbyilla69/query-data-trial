@@ -5,6 +5,7 @@ import CardHeader from '@material-ui/core/CardHeader';
 import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
+import Divider from '@material-ui/core/Divider';
 
 const useStyles = makeStyles((theme) => ({
   root: { minWidth: 400, marginLeft: theme.spacing(4) },
@@ -34,6 +35,7 @@ const PlayerCard = ({ playerStat, primaryTeamColor }) => {
           </Typography>
         }
       />
+      <Divider />
       <CardActionArea>
         <CardMedia
           className={classes.media}
