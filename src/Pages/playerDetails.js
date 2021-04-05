@@ -13,6 +13,8 @@ import Grid from '@material-ui/core/Grid';
 import CardHeader from '@material-ui/core/CardHeader';
 import Avatar from '@material-ui/core/Avatar';
 import { createData } from '../util';
+import Container from '@material-ui/core/Container';
+import FloatingActionButtonZoom from '../components/PlayersStats/New-Stuff/floating-action-button';
 
 const useStyles = makeStyles({
   root: { height: 326, width: 500 },
@@ -51,6 +53,7 @@ export default function PlayerDetails() {
   if (isLoading) return <h2>Loading...</h2>; //<CircleLoader size={400} color={'#033369'} />;
   if (error) throw error;
   const playerStat = data.playerStatsTotals[0].player;
+  const stats = data.playerStatsTotals[0].stats;
   const primaryTeamColor = data.references.teamReferences[0].teamColoursHex[0];
   const secondaryTeamColor =
     data.references.teamReferences[0].teamColoursHex[1];
@@ -62,7 +65,8 @@ export default function PlayerDetails() {
 
     // createData('Games Played', stats.gamesPlayed)
   ];
-
+  const teamName = data.references.teamReferences[0].name; //data.references.teamReferences[0].city
+  const teamCity = data.references.teamReferences[0].city; //data.references.teamReferences[0].city
   const morePlayerInfo = [
     createData('Height:', playerStat.height),
     createData('Weight:', playerStat.weight)
@@ -71,14 +75,36 @@ export default function PlayerDetails() {
   ];
 
   return (
-    <React.Fragment>
-      <div
-        className={classes.backgroundImage}
-        style={{
-          background: `url(${teamLogo}) left 20% bottom 60%/cover no-repeat border-box transparent`,
-          filter: `drop-shadow(16px 16px 20px ${primaryTeamColor})`
-        }}
-      />
+    <Container
+      style={{
+        filter: `drop-shadow(16px 16px 20px ${primaryTeamColor})`,
+        height: '100vh'
+      }}
+    >
+      <Grid style={{ height: '200px', width: '1448px' }} container spacing={5}>
+        <Grid
+          item
+          // className={classes.backgroundImage}
+          spacing={8}
+          style={{
+            background: `url(${teamLogo}) left 10% bottom 30%/cover no-repeat border-box transparent`,
+            filter: `drop-shadow(16px 16px 20px ${primaryTeamColor})`,
+            // border: '2px solid black',
+            padding: ' 80px',
+            //   background: `url(${teamLogo})`,
+            //   backgroundSize: 'cover',
+            //   backgroundRepeat: 'no-repeat',
+            height: '175px',
+            //   width: '1448px',
+            backgroundSize: '150px 150px'
+          }}
+        />
+
+        <Grid item>
+          <Typography variant='h1'>{`${teamCity} ${teamName}`}</Typography>
+        </Grid>
+      </Grid>
+
       <Grid container>
         <Grid item>
           <Card className={classes.root} variant='outlined'>
@@ -126,19 +152,6 @@ export default function PlayerDetails() {
                   {playersInfo.map((p) => (
                     <div key={p.name}>{`${p.name} ${p.info}`}</div>
                   ))}
-                  {/* <Typography
-                  className={classes.title}
-                  color='textSecondary'
-                  gutterBottom
-                >
-                  Card 2
-                </Typography>
-                <Typography variant='h5' component='h2'>
-                  be{bull}nev{bull}o{bull}lent
-                </Typography>
-                <Typography className={classes.pos} color='textSecondary'>
-                  adjective
-                </Typography> */}
                 </Grid>
                 <Grid item>
                   {morePlayerInfo.map((p) => (
@@ -149,7 +162,12 @@ export default function PlayerDetails() {
             </CardContent>
           </Card>
         </Grid>
+        <FloatingActionButtonZoom
+          className={classes.floatingButton}
+          playerStat={playerStat}
+          stats={stats}
+        />
       </Grid>
-    </React.Fragment>
+    </Container>
   );
 }
