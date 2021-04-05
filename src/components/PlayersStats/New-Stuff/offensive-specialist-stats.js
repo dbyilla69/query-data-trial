@@ -1,23 +1,3 @@
-// export default function OffensiveSpecialistStats({ stats }) {
-//   return (
-//     <>
-//       <div>rushAtt: {stats?.rushing?.rushAttempts}</div>
-//       <div>rushYds: {stats?.rushing?.rushYards}</div>
-//       <div>rushAvg: {stats?.rushing?.rushAverage}.0</div>
-//       <div>lngRush: {stats?.rushing?.rushLng}</div>
-//       <div>rushTd: {stats?.rushing?.rushTD}</div>
-//       <div>rush1stDowns: {stats?.rushing?.rush1stDowns}</div>
-//       <div>rush20Plus: {stats?.rushing?.rush20Plus}</div>
-//       <div>rec: {stats?.receiving?.receptions}</div>
-//       <div>recTd: {stats?.receiving?.recTD}</div>
-//       <div>recAvg: {stats?.receiving?.recAverage}</div>
-//       <div>recLng: {stats?.receiving?.recLng}</div>
-//       <div>Recfum: {stats?.receiving?.recFumbles}</div>
-//       <div>recYds: {stats?.receiving?.recYards}</div>
-//       <div>targets: {stats?.receiving?.targets}</div>
-//     </>
-//   );
-// }
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
@@ -25,6 +5,7 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import { rbStats, wrStats, qbStats } from './offensive-stats';
 
 const useStyles = makeStyles({
   root: {
@@ -43,35 +24,18 @@ const useStyles = makeStyles({
   }
 });
 
-export default function SimpleCard() {
+export default function SimpleCard({ playerStat, stats }) {
   const classes = useStyles();
   const bull = <span className={classes.bullet}>•</span>;
 
   return (
     <Card className={classes.root}>
       <CardContent>
-        <Typography
-          className={classes.title}
-          color='textSecondary'
-          gutterBottom
-        >
-          Word of the Day
-        </Typography>
-        <Typography variant='h5' component='h2'>
-          be{bull}nev{bull}o{bull}lent
-        </Typography>
-        <Typography className={classes.pos} color='textSecondary'>
-          adjective
-        </Typography>
-        <Typography variant='body2' component='p'>
-          well meaning and kindly.
-          <br />
-          {'"a benevolent smile"'}
-        </Typography>
+        {/* {playerStat.primaryPosition === 'RB' && rbStats(stats)} */}
+        {rbStats(playerStat, stats)}
+        {wrStats(playerStat, stats)}
+        {qbStats(playerStat, stats)}
       </CardContent>
-      <CardActions>
-        <Button size='small'>Learn More</Button>
-      </CardActions>
     </Card>
   );
 }

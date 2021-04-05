@@ -76,7 +76,6 @@ export default function FloatingActionButtonZoom({ playerStat, stats }) {
   const theme = useTheme();
   const [value, setValue] = React.useState(0);
 
-  console.log('fab ', stats);
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
@@ -134,7 +133,7 @@ export default function FloatingActionButtonZoom({ playerStat, stats }) {
       > */}
 
       <TabPanel value={value} index={0} dir={theme.direction}>
-        <OffensiveSpecialistStats stats={stats} />
+        <OffensiveSpecialistStats stats={stats} playerStat={playerStat} />
       </TabPanel>
       <TabPanel value={value} index={1} dir={theme.direction}>
         <CollapsibleTable />
