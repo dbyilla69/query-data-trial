@@ -1,0 +1,53 @@
+.container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  /* flex-direction: row; */
+
+  /*  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-gap: 5px; */
+  /* flex-direction: row; */
+  /* align-items: center; */
+  /* width: 300px; */
+}
+
+.flexContainer {
+  display: flex;
+  background-color: DodgerBlue;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+
+.flexContainer > div {
+  color: orange;
+  margin: 10px;
+  padding: 20px;
+  font-size: 30px;
+  width: 100px;
+}
+
+.parent-wrapper {
+  height: 100%;
+  width: 100%;
+  border: 1px solid black;
+}
+.parent {
+  display: flex;
+  font-size: 0;
+  flex-wrap: wrap;
+  margin-right: -10px;
+  margin-bottom: -10px;
+}
+.child {
+  background: blue;
+  height: 100px;
+  flex-grow: 1;
+  flex-shrink: 0;
+  flex-basis: calc(25% - 10px);
+}
+.child:nth-child(even) {
+  margin: 0 10px 10px 10px;
+  background-color: lime;
+}
+.child:nth-child(odd) {
+  background-color: orange;
+}
