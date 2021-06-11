@@ -18,6 +18,10 @@ import RushingStats from '../rushingStats';
 import PlayerDetailsInfo from '../../Players/player-info-details';
 import OffensiveSpecialistStats from './offensive-specialist-stats';
 import CollapsibleTable from './weekly-stats-breakdown';
+import { createData } from '../../../util';
+import List from '@material-ui/core/List';
+import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
+import ListItemText from '@material-ui/core/ListItemText';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -110,6 +114,54 @@ export default function FloatingActionButtonZoom({ playerStat, stats }) {
     }
   ];
 
+  const rushingStats = [
+    createData('Rush 1st Downs:', stats.rushing?.rush1stDowns),
+    createData('Rush 1st Downs Pct:', stats.rushing?.rush1stDownsPct),
+    createData('Rush 20 Plus:', stats.rushing?.rush20Plus),
+    createData('Rush 40 Plus:', stats.rushing?.rush40Plus),
+    createData('Rush Attempts:', stats.rushing?.rushAttempts),
+    createData('Rush Average:', stats.rushing?.rushAverage),
+    createData('Rush Fumbles:', stats.rushing?.rushFumbles),
+    createData('Rush Lng: ', stats.rushing?.rushLng),
+    createData('Rush TD:', stats.rushing?.rushTD),
+    createData('Rush Yards:', stats.rushing?.rushYards),
+    createData('Rec 1st Downs:', stats.receiving?.rec1stDowns),
+    createData('Rec 20 Plus:', stats.receiving?.rec20Plus),
+    createData('Rec 40 Plus:', stats.receiving?.rec40Plus),
+    createData('Rec Average: ', stats.receiving?.recAverage),
+    createData('Rec Fumbles:', stats.receiving?.recFumbles),
+    createData('Rec Long:', stats.receiving?.recLng),
+    createData('Rec TD:', stats.receiving?.recTD),
+    createData('Rec Yards:', stats.receiving?.recYards),
+    createData('Receptions:', stats.receiving?.receptions),
+    createData('Targets:', stats.receiving?.targets),
+    createData('Fum Forced:', stats.fumbles?.fumForced),
+    createData('Fum Lost:', stats.fumbles?.fumLost),
+    createData('Fum Opp Rec:', stats.fumbles?.fumOppRec),
+    createData('Fum Own Rec:', stats.fumbles?.fumOwnRec),
+    createData('Fum Rec Yds:', stats.fumbles?.fumRecYds),
+    createData('Fum TD:', stats.fumbles?.fumTD),
+    createData('Fum Total Rec:', stats.fumbles?.fumTotalRec),
+    createData('Fumbles:', stats.fumbles?.fumbles),
+    createData('Pass 20 Plus:', stats.passing?.pass20Plus),
+    createData('Pass 40 Plus:', stats.passing?.pass40Plus),
+    createData('Pass Attempts:', stats.passing?.passAttempts),
+    createData('Pass Average:', stats.passing?.passAvg),
+    createData('Pass Completions:', stats.passing?.passCompletions),
+    createData('Pass Int:', stats.passing?.passInt),
+    createData('Pass Int Pct:', stats.passing?.passIntPct),
+    createData('Pass Lng:', stats.passing?.passLng),
+    createData('Pass Pct:', stats.passing?.passPct),
+    createData('Pass Sack Yards: ', stats.passing?.passSackY),
+    createData('Pass Sacks:', stats.passing?.passSacks),
+    createData('Pass TD:', stats.passing?.passTD),
+    createData('Pass TD Pct:', stats.passing?.passTDPct),
+    createData('Pass Yards:', stats.passing?.passYards),
+    createData('Pass Yards Per Att: ', stats.passing?.passYardsPerAtt),
+    createData('Qb Rating:', stats.passing?.qbRating)
+  ];
+
+  console.log('player data', rushingStats);
   return (
     <div className={classes.root}>
       <AppBar position='static' color='default'>
@@ -133,7 +185,13 @@ export default function FloatingActionButtonZoom({ playerStat, stats }) {
       > */}
 
       <TabPanel value={value} index={0} dir={theme.direction}>
-        <OffensiveSpecialistStats stats={stats} playerStat={playerStat} />
+        {rushingStats.map((p) => (
+          <List dense key={p.name}>
+            <ListItemText primary={p.name} />
+            <ListItemSecondaryAction>{p.info}</ListItemSecondaryAction>
+          </List>
+        ))}
+        {/* <OffensiveSpecialistStats stats={stats} playerStat={playerStat} /> */}
       </TabPanel>
       <TabPanel value={value} index={1} dir={theme.direction}>
         <CollapsibleTable />
